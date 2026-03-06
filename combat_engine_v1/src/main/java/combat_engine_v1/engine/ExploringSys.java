@@ -28,6 +28,7 @@ public class ExploringSys {
         Scanner sc = new Scanner(System.in);
         boolean isGameRunning = true;
         String actionChoice = "";
+        System.out.println("You have enter the dungon");
         while (isGameRunning) {
             System.out.println("1.Explore");
             System.out.println("2.Look around");
@@ -50,7 +51,7 @@ public class ExploringSys {
                         player.getStatus();
                         break;
                     case ESCAPE:
-                        System.out.println("You escaped the area.");
+                        System.out.println("You escaped the Dungeon.");
                         actionChoice = "Escape";
                         break;
                 }

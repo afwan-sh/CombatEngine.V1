@@ -22,7 +22,7 @@ public abstract class Characters {
         } 
        return isCrit;
     }
-
+    public abstract void damageTaken(int damage);
     public abstract int getDex();
     public abstract int getHp();
     public abstract int getDef();

@@ -1,6 +1,8 @@
 package combat_engine_v1.userMenu;
 import java.util.Scanner;
 import combat_engine_v1.action.ActionLogic;
+import combat_engine_v1.character.Monster;
+import combat_engine_v1.character.Characters;
 enum BattleAction{
     BASIC_ATTACK(1),
     BLOCK(2),
@@ -24,7 +26,7 @@ public class BattleMenu {
     int damage;
     Scanner sc=new Scanner(System.in);
     ActionLogic activite=new ActionLogic();
-    public int fighting(String User,int damage){
+    public int fighting(Characters attacker,Characters defender,int damage){
         while(loop){
         System.out.println("1.Basic Attack");
         System.out.println("2.Block");
@@ -37,24 +39,23 @@ public class BattleMenu {
                 BattleAction action1 = BattleAction.fromInt(Integer.parseInt(action));
                     switch (action1) {
                         case BASIC_ATTACK:
-                            activite.basicAttack(User);
+                            damage=activite.basicAttack(attacker,defender);
                             break;  
                         case BLOCK:
-                            activite.block(User,damage);
+                            damage=activite.block(attacker,defender,damage);
                             break;
                         case DOGE:
-                            activite.doge(User,damage);
+                            damage=activite.doge(attacker,defender,damage);
                             break;
                         case SKILL:
                             System.out.println("used skill");
                             break;
                         case ESCAPE:
                             damage=-1;
-                            System.out.println(User+" Used runway");
+                            System.out.println(attacker.getClass().getSimpleName()+" Used runway");
                             break;
                     }
-                    loop=false;
-                    
+                    loop=false;    
             }catch(IllegalArgumentException e){
                 System.out.println("Enter a valid action number");
             }   

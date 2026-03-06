@@ -14,7 +14,6 @@ public class MainEngine {
             if (actionChoice.equalsIgnoreCase("Explore") && isMonsterAppeared) {
                  BattleSys BattleSys = new BattleSys();
                  BattleSys.battleStart(player, monster);
-                break;
             } else if (actionChoice.equalsIgnoreCase("Escape")) {
                 break;
             } else if (actionChoice.equals("Explore")) {
