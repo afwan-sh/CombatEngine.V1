@@ -6,9 +6,9 @@ public class BattleSys {
     public void battleStart(Player player, Monster monster) {
         boolean battleMode=true;
         int damageDone=0;
+        BattleMenu battleMenu=new BattleMenu();
+        String firstTurn=(player.getDex()>monster.getDex())? "player":"monster";
         while(battleMode){
-            BattleMenu battleMenu=new BattleMenu();
-            String firstTurn=(player.getDex()>monster.getDex())? "player":"monster";
             if(firstTurn.equalsIgnoreCase("player")){
                 damageDone=battleMenu.fighting(player,monster,damageDone);
                 if(damageDone==-1){
@@ -18,6 +18,8 @@ public class BattleSys {
                 monster.damageTaken(damageDone);
                 if(monster.getHp()<=0){ 
                     System.out.println("Monster is defeated!");
+                    player.addScore();
+                    battleMode=false;
                 }
             }else{
                 damageDone=battleMenu.fighting(monster,player,damageDone);
@@ -28,6 +30,7 @@ public class BattleSys {
                 player.damageTaken(damageDone);
                 if(player.getHp()<=0){
                    System.out.println("You have died!");
+                   battleMode=false;
                 } 
             }     
         }

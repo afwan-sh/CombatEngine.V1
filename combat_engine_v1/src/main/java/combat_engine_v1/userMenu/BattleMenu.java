@@ -1,7 +1,6 @@
 package combat_engine_v1.userMenu;
 import java.util.Scanner;
 import combat_engine_v1.action.ActionLogic;
-import combat_engine_v1.character.Monster;
 import combat_engine_v1.character.Characters;
 enum BattleAction{
     BASIC_ATTACK(1),
@@ -22,11 +21,11 @@ enum BattleAction{
    }
 }
 public class BattleMenu {
-    boolean loop=true;
     int damage;
     Scanner sc=new Scanner(System.in);
     ActionLogic activite=new ActionLogic();
     public int fighting(Characters attacker,Characters defender,int damage){
+        boolean loop=true;
         while(loop){
         System.out.println("1.Basic Attack");
         System.out.println("2.Block");

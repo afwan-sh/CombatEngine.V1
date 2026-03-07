@@ -32,6 +32,7 @@ public class MainMenu {
                         case START:
                             System.out.println("Game is started");
                             MainEngine engine=new MainEngine();
+                            System.out.println("You have enter the dungon");
                             engine.startGame();
                             break;
                         case EXIT:

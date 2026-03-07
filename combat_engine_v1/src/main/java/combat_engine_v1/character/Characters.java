@@ -22,10 +22,15 @@ public abstract class Characters {
         } 
        return isCrit;
     }
+    public abstract void getStatus();
     public abstract void damageTaken(int damage);
     public abstract int getDex();
     public abstract int getHp();
     public abstract int getDef();
     public abstract int getAtk();
+    public abstract int getEND();
+    public abstract int getMAXEND();
+    public abstract void subEND(int num);
+    public abstract void addEND(int num);
 }
 

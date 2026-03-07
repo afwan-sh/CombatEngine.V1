@@ -4,7 +4,7 @@ public class MonsterSys {
     boolean isMonsterAppeared=false;
     String monsterState;
     public boolean monsterAppeared(){
-        if((int)(Math.random()*10)>5){
+        if((int)(Math.random()*10)<7){
             isMonsterAppeared=true; 
         }
         return isMonsterAppeared;

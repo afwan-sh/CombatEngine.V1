@@ -1,7 +1,5 @@
 package combat_engine_v1.engine;
 import java.util.Scanner;
-import combat_engine_v1.character.Monster;
-import combat_engine_v1.character.Player;
 enum ExploringAction {
     EXPLORE(1),
     LOOK(2),
@@ -24,38 +22,37 @@ enum ExploringAction {
 }
 
 public class ExploringSys {
-    public String exploring(boolean isMonsterAppeared, Player player, Monster monster) {
-        Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
+    public String exploring(boolean isMonsterAppeared) {
         boolean isGameRunning = true;
         String actionChoice = "";
-        System.out.println("You have enter the dungon");
         while (isGameRunning) {
             System.out.println("1.Explore");
             System.out.println("2.Look around");
             System.out.println("3.Check status");
             System.out.println("4.Escape");
             System.out.print("Choose your action index:");
-            String action = sc.nextLine();
+            String action=sc.nextLine();
             try {
-                ExploringAction choice = ExploringAction.fromInt(Integer.parseInt(action));
+                ExploringAction choice=ExploringAction.fromInt(Integer.parseInt(action));
                 switch (choice) {
                     case EXPLORE:
                         Explore(isMonsterAppeared);
-                        actionChoice = "Explore";
+                        actionChoice="Explore";
                         break;
                     case LOOK:
                         lookAround(isMonsterAppeared);
-                        actionChoice = "Look around";
+                        actionChoice="Look around";
                         break;
                     case STATUS:
-                        player.getStatus();
+                        actionChoice="status";
                         break;
                     case ESCAPE:
                         System.out.println("You escaped the Dungeon.");
-                        actionChoice = "Escape";
+                        actionChoice="Escape";
                         break;
                 }
-                isGameRunning = false;
+                isGameRunning=false;
             } catch (IllegalArgumentException e) {
                 System.out.println("no such option");
             }

@@ -4,7 +4,7 @@ public class Monster extends Characters{
     private int MAXMP;
     private int MAXEND;
     public Monster(){
-        super(12000,5,30,1,15,12);
+        super(150,5,30,1,1,12);
         MAXHP=HP;
         MAXMP=MP;
         MAXEND=END;
@@ -24,6 +24,12 @@ public class Monster extends Characters{
     public int getAtk(){
         return ATK;
     }
+    public int getEND(){
+        return END;
+    }
+    public int getMAXEND(){
+    return MAXEND;
+    }
     public void damageTaken(int damage){
         if(damage>0){
             HP-=damage;
@@ -31,5 +37,15 @@ public class Monster extends Characters{
             HP=0;
         }
         } 
+    }
+    public void subEND(int num){
+        if(num>0){
+            END-=num;
+        }
+    }
+    public void addEND(int num){
+        if(END<MAXEND && num>0){
+            END+=num;
+        }
     }
 }
