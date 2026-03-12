@@ -19,6 +19,7 @@ enum MainMenuOptions{
 public class MainMenu {
     boolean isRunning=true;
     Scanner sc=new Scanner(System.in);
+
     public void Menu(){
         System.out.println("Welcome to the Combat EngineV1");
         while(isRunning){

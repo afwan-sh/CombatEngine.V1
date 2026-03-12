@@ -1,14 +1,18 @@
 package combat_engine_v1.engine;
 import combat_engine_v1.character.Monster;
 import combat_engine_v1.character.Player;
+import combat_engine_v1.userMenu.ExploringMenu;
+import dungeonArea.AncientPool;
 public class MainEngine {
     public void startGame() {
         Player player = new Player();
         MonsterSys monsterSys = new MonsterSys();
         BattleSys BattleSys = new BattleSys();
-        ExploringSys ExploringEngine = new ExploringSys();
+        ExploringMenu ExploringEngine = new ExploringMenu();
+        AncientPool ancientPool=new AncientPool();
         boolean isMonsterAppeared = false;
         int end=player.getEND();
+        int monsterDeafedForPool=0;
         while (true) {
             isMonsterAppeared = monsterSys.monsterAppeared();
             Monster monster = new Monster();
@@ -21,6 +25,7 @@ public class MainEngine {
                     BattleSys.battleStart(player, monster);
                     if(monster.getHp()==0){
                         player.addEND(1);
+                        monsterDeafedForPool++;
                         continue;
                     }
                 }
@@ -36,12 +41,15 @@ public class MainEngine {
                     if(end<=0){
                         System.out.println("You Stamina is low");
                     }
+                    ancientPool.poolAppeared(monsterDeafedForPool, player);
                 break;
             }else if(actionChoice.equalsIgnoreCase("status")){
+                player.addEND(1);
                 player.getStatus();
             }
-            else if(actionChoice.equalsIgnoreCase("")){
+            else if(actionChoice.equalsIgnoreCase("look around")){
                 player.addEND(2);
+                ancientPool.poolAppeared(monsterDeafedForPool, player);
             }
         }
     }

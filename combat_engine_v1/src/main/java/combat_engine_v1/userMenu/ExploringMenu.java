@@ -1,4 +1,4 @@
-package combat_engine_v1.engine;
+package combat_engine_v1.userMenu;
 import java.util.Scanner;
 enum ExploringAction {
     EXPLORE(1),
@@ -21,7 +21,7 @@ enum ExploringAction {
     }
 }
 
-public class ExploringSys {
+public class ExploringMenu {
     Scanner sc = new Scanner(System.in);
     public String exploring(boolean isMonsterAppeared) {
         boolean isGameRunning = true;

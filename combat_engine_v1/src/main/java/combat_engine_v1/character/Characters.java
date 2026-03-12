@@ -7,7 +7,8 @@ public abstract class Characters {
     protected int DEF;
     protected int DEX;
     protected int END;
-     public Characters(int hp,int mp,int atk,int def,int dex,int end){
+    protected int Level;
+     public Characters(int hp,int mp,int atk,int def,int dex,int end,int Level){
           this.HP=hp;
           this.MP=mp;
           this.ATK=atk;

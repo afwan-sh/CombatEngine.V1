@@ -4,13 +4,13 @@ public class Monster extends Characters{
     private int MAXMP;
     private int MAXEND;
     public Monster(){
-        super(150,5,30,1,1,12);
+        super(250,50,30,20,10,20,2);
         MAXHP=HP;
         MAXMP=MP;
         MAXEND=END;
     }
     public void getStatus(){
-        System.out.printf("Monster Status:\nHp:%d/%d\nMp:%d/%d\nAtk:%d\nDef:%d\nDex:%d\nEnd:%d/%d\n",HP,MAXHP,MP,MAXMP,ATK,DEF,DEX,END,MAXEND);
+        System.out.printf("Monster Status:\nLevel:%d\nHp:%d/%d\nMp:%d/%d\nAtk:%d\nDef:%d\nDex:%d\nEnd:%d/%d\n",Level,HP,MAXHP,MP,MAXMP,ATK,DEF,DEX,END,MAXEND);
     }  
     public int getDex(){
         return DEX;
@@ -48,4 +48,12 @@ public class Monster extends Characters{
             END+=num;
         }
     }
+    public int giveEXP(){
+        return (int)(Level*1.5)+(int)(Math.random()*5);
+    }
 }
+
+
+
+
+

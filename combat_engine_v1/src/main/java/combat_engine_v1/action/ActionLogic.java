@@ -1,7 +1,6 @@
 package combat_engine_v1.action;
 import combat_engine_v1.character.Characters;
 public class ActionLogic {
-    
     public int basicAttack(Characters user,Characters oppenent){
         int damage=0;
         int end=user.getEND();
@@ -11,6 +10,8 @@ public class ActionLogic {
             damage=1;
             }
             System.out.printf("%s has done %d of damage\n",user.getClass().getSimpleName(),damage);
+        }else{
+            System.out.println("low Stamina");
         }
         user.subEND(1);
         return damage;  

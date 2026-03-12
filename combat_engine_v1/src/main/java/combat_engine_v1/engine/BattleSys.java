@@ -3,10 +3,11 @@ import combat_engine_v1.character.Monster;
 import combat_engine_v1.character.Player;
 import combat_engine_v1.userMenu.BattleMenu;
 public class BattleSys {
-    public void battleStart(Player player, Monster monster) {
+    public int battleStart(Player player, Monster monster) {
         boolean battleMode=true;
         int damageDone=0;
         BattleMenu battleMenu=new BattleMenu();
+        int healingPool=0;
         String firstTurn=(player.getDex()>monster.getDex())? "player":"monster";
         while(battleMode){
             if(firstTurn.equalsIgnoreCase("player")){
@@ -19,6 +20,8 @@ public class BattleSys {
                 if(monster.getHp()<=0){ 
                     System.out.println("Monster is defeated!");
                     player.addScore();
+                    player.addEXP(monster.giveEXP());
+                    healingPool++;
                     battleMode=false;
                 }
             }else{
@@ -34,6 +37,6 @@ public class BattleSys {
                 } 
             }     
         }
+        return healingPool;
     }
-   
 }
