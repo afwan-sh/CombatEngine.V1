@@ -1,6 +1,8 @@
 package combat_engine_v1.action;
 import combat_engine_v1.character.Characters;
+import combat_engine_v1.ui.Ui;
 public class ActionLogic {
+    Ui ui=new Ui();
     public int basicAttack(Characters user,Characters oppenent){
         int damage=0;
         int end=user.getEND();
@@ -9,9 +11,10 @@ public class ActionLogic {
             if(damage<=0){
             damage=1;
             }
-            System.out.printf("%s has done %d of damage\n",user.getClass().getSimpleName(),damage);
+            String message=user.getClass().getSimpleName()+" has done "+damage+" of damage\n";
+            ui.message(message,"");
         }else{
-            System.out.println("low Stamina");
+            ui.message("low Stamina","");
         }
         user.subEND(1);
         return damage;  
@@ -21,15 +24,18 @@ public class ActionLogic {
             int end=user.getEND();
             if(end>0){
             if(user.getDex()<oppenent.getDex()){
-                System.out.println(user.getClass().getSimpleName()+"'s block failed!");
+                String message=user.getClass().getSimpleName()+"'s block failed!";
+                ui.message(message,"");
                 doneDamage=damage;
                 usedEND=1;
             }else if(user.getDex()>oppenent.getDex() && user.getDef()>oppenent.getAtk()){
-                System.out.println(user.getClass().getSimpleName()+" took 50% reduced damage!");
+                String message=user.getClass().getSimpleName()+" took 50% reduced damage!";
+                ui.message(message,"");
                 doneDamage=damage/2;
                 usedEND=1;
             }else{
-                System.out.println(user.getClass().getSimpleName()+" successfully blocked the attack!");
+                String message=user.getClass().getSimpleName()+" successfully blocked the attack!";
+                ui.message(message,"");
                 doneDamage=0;
                 usedEND=2;
              }
@@ -42,10 +48,12 @@ public class ActionLogic {
         int end=user.getEND();
         if(end>0){
         if(user.getDef()>opponent.getAtk()){
-            System.out.println("");
+            String message=user.getClass().getSimpleName()+" Block succesfully";
+            ui.message(message,"");
             doneDamage=damage/2;
         }else{
-            System.out.println(user.getClass().getSimpleName()+" failed to block the attack!");
+            String message=user.getClass().getSimpleName()+" failed to block the attack!";
+            ui.message(message," ");
             doneDamage=damage;
         }
         user.subEND(usedEND);

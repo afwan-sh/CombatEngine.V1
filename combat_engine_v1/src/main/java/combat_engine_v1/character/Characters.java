@@ -33,5 +33,7 @@ public abstract class Characters {
     public abstract int getMAXEND();
     public abstract void subEND(int num);
     public abstract void addEND(int num);
+    public abstract int getMaxHP();
+
 }
 

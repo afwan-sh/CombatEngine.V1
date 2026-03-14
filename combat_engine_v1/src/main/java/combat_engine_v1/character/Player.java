@@ -7,7 +7,7 @@ public class Player extends Characters{
     private int totalScore;
     private int EXP;
     public Player(){
-        super(150,50,20,20,15,20,1);
+        super(100,50,15,10,15,20,1);
         MAXHP=HP;
         MAXMP=MP;
         MAXEND=END;
@@ -108,6 +108,9 @@ public class Player extends Characters{
         HP=MAXHP;
         MP=MAXMP;
         END=MAXEND;
+    }
+    public int getLevel(){
+        return Level;
     }
 }
 

@@ -1,12 +1,13 @@
 package combat_engine_v1.userMenu;
-import java.util.Scanner;
 import combat_engine_v1.engine.MainEngine;
+import combat_engine_v1.ui.Ui;
+import java.util.ArrayList;
 enum MainMenuOptions{
-    START(1),
-    EXIT(2);
-    private int value;
+    START("Start Game"),
+    EXIT("Exit");
+    private String value;
     private static final MainMenuOptions[] ENUM=MainMenuOptions.values();
-    private MainMenuOptions(int value){
+    private MainMenuOptions(String value){
         this.value=value;
     }
     public static MainMenuOptions fromInt(int id){
@@ -15,35 +16,37 @@ enum MainMenuOptions{
         }
         return ENUM[id-1];
     }
+    public static ArrayList<String> getStrings(){
+        ArrayList<String> options=new ArrayList<>();
+        for (MainMenuOptions option:ENUM) {
+            options.add(option.value);
+        }
+        return options;
+    }
 }
 public class MainMenu {
     boolean isRunning=true;
-    Scanner sc=new Scanner(System.in);
-
+    
+    Ui ui=new Ui();
     public void Menu(){
-        System.out.println("Welcome to the Combat EngineV1");
         while(isRunning){
-            System.out.println("1.Start Game");
-            System.out.println("2.Exit");
-            System.out.print("Enter your Choice index:");
-            String action=sc.nextLine();
+            int action=ui.menuAnimation("Welcome to the Combat EngineV1",MainMenuOptions.getStrings(),"Start_Menu");  
             try{
-                MainMenuOptions choice = MainMenuOptions.fromInt(Integer.parseInt(action));
+                MainMenuOptions choice = MainMenuOptions.fromInt(action);
                     switch (choice) {
                         case START:
-                            System.out.println("Game is started");
+                            ui.message("Game is started","green");
                             MainEngine engine=new MainEngine();
-                            System.out.println("You have enter the dungon");
+                            ui.message("You have enter the dungon","cyan");
                             engine.startGame();
                             break;
                         case EXIT:
-                            System.out.println("Game is closing");
+                            ui.message("Game is closing","cyan");
                             isRunning=false;
-                            sc.close();
                             break;
                     }
             }catch(IllegalArgumentException e){
-                System.out.println("no such option");
+                ui.message("no such option","red");
             }
         }
     }

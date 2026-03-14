@@ -11,7 +11,7 @@ public class BattleSys {
         String firstTurn=(player.getDex()>monster.getDex())? "player":"monster";
         while(battleMode){
             if(firstTurn.equalsIgnoreCase("player")){
-                damageDone=battleMenu.fighting(player,monster,damageDone);
+                damageDone=battleMenu.fighting(player,monster,damageDone,firstTurn);
                 if(damageDone==-1){
                     battleMode=false;
                     System.out.println("You have escaped the battle!");
@@ -24,8 +24,9 @@ public class BattleSys {
                     healingPool++;
                     battleMode=false;
                 }
+                damageDone=battleMenu.fighting(monster,player,damageDone,"monster");
             }else{
-                damageDone=battleMenu.fighting(monster,player,damageDone);
+                damageDone=battleMenu.fighting(monster,player,damageDone,firstTurn);
                 if(damageDone==-1){
                    battleMode=false;
                    System.out.println("Monster have escaped the battle!");
@@ -35,6 +36,7 @@ public class BattleSys {
                    System.out.println("You have died!");
                    battleMode=false;
                 } 
+                damageDone=battleMenu.fighting(player,monster,damageDone,"player");
             }     
         }
         return healingPool;
