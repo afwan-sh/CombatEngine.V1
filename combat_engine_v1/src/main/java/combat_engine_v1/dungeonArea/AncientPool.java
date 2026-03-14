@@ -1,4 +1,4 @@
-package dungeonArea;
+package combat_engine_v1.dungeonArea;
 import combat_engine_v1.character.Player;
 public class AncientPool {
 public void poolAppeared(int num,Player player){

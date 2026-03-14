@@ -1,22 +1,22 @@
 package combat_engine_v1.engine;
 import combat_engine_v1.character.Monster;
 import combat_engine_v1.character.Player;
+import combat_engine_v1.dungeonArea.AncientPool;
 import combat_engine_v1.userMenu.ExploringMenu;
-import dungeonArea.AncientPool;
 public class MainEngine {
     public void startGame() {
         Player player = new Player();
         MonsterSys monsterSys = new MonsterSys();
         BattleSys BattleSys = new BattleSys();
-        ExploringMenu ExploringEngine = new ExploringMenu();
+        ExploringMenu exploringMenu = new ExploringMenu();
         AncientPool ancientPool=new AncientPool();
         boolean isMonsterAppeared = false;
         int end=player.getEND();
         int monsterDeafedForPool=0;
         while (true) {
-            isMonsterAppeared = monsterSys.monsterAppeared();
             Monster monster = new Monster();
-            String actionChoice = ExploringEngine.exploring(isMonsterAppeared);
+            isMonsterAppeared = monsterSys.monsterAppeared(player,monster);
+            String actionChoice = exploringMenu.exploring(isMonsterAppeared);
             if (actionChoice.equalsIgnoreCase("Explore") && isMonsterAppeared) {
                 if(end<=0){
                     System.out.println("You Stamina is low");

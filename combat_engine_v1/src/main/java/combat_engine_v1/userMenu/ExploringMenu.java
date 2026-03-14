@@ -1,40 +1,45 @@
 package combat_engine_v1.userMenu;
 import java.util.Scanner;
+import java.util.ArrayList;
+import combat_engine_v1.ui.Ui;
 enum ExploringAction {
-    EXPLORE(1),
-    LOOK(2),
-    STATUS(3),
-    ESCAPE(4);
+    EXPLORE("Explore"),
+    LOOK("Look around"),
+    STATUS("Check status"),
+    ESCAPE("Escape");
 
-    private int value;
-    private static final ExploringAction[] ENUMS = ExploringAction.values();
+    private String value;
+    private static final ExploringAction[] ENUM= ExploringAction.values();
 
-    ExploringAction(int value) {
+    ExploringAction(String value) {
         this.value = value;
     }
 
     public static ExploringAction fromInt(int id) {
-        if (id < 1 || id > ENUMS.length) {
+        if (id < 1 || id > ENUM.length) {
             throw new IllegalArgumentException();
         }
-        return ENUMS[id - 1];
+        return ENUM[id - 1];
+    }
+    public static ArrayList<String> getStrings(){
+        ArrayList<String> options=new ArrayList<>();
+        for (ExploringAction option:ENUM) {
+            options.add(option.value);
+        }
+        return options;
     }
 }
 
 public class ExploringMenu {
     Scanner sc = new Scanner(System.in);
+    Ui ui=new Ui();
     public String exploring(boolean isMonsterAppeared) {
         boolean isGameRunning = true;
         String actionChoice = "";
         while (isGameRunning) {
-            System.out.println("1.Explore");
-            System.out.println("2.Look around");
-            System.out.println("3.Check status");
-            System.out.println("4.Escape");
-            System.out.print("Choose your action index:");
-            String action=sc.nextLine();
+            int action=ui.menuAnimation("Explore",ExploringAction.getStrings(),"Dungon");
             try {
-                ExploringAction choice=ExploringAction.fromInt(Integer.parseInt(action));
+                ExploringAction choice=ExploringAction.fromInt(action);
                 switch (choice) {
                     case EXPLORE:
                         Explore(isMonsterAppeared);

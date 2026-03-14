@@ -4,7 +4,7 @@ public class Monster extends Characters{
     private int MAXMP;
     private int MAXEND;
     public Monster(){
-        super(250,50,30,20,10,20,2);
+        super(80,50,12,8,14,10,1);
         MAXHP=HP;
         MAXMP=MP;
         MAXEND=END;
@@ -49,10 +49,23 @@ public class Monster extends Characters{
         }
     }
     public int giveEXP(){
-        return (int)(Level*1.5)+(int)(Math.random()*5);
+        double monsterXp=Math.pow(Level,2)*50+100;
+        double baseXp=monsterXp/12;
+        return (int)(baseXp*(0.9+(Math.random()*0.2)));
+    }
+    public int getMaxHP(){
+        return MAXHP;
+    }
+    public void makeLevel(int level){
+        Level=level;
+        HP=HP*(int)(1.1*Math.pow(level,1));
+        MP=MP*(int)(1.1*Math.pow(level,1));
+        ATK=ATK*(int)(1.1*Math.pow(level,1));
+        DEF=DEF*(int)(1.1*Math.pow(level,1));
+        DEX=DEX*(int)(1.1*Math.pow(level,1));
+        END=END*(int)(1.1*Math.pow(level,1));
     }
 }
-
 
 
 
