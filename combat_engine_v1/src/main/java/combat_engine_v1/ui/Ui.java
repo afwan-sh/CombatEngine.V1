@@ -1,5 +1,6 @@
 package combat_engine_v1.ui;
 import java.util.Scanner;
+import java.io.IOException;
 import java.util.ArrayList;
 public class Ui {
     int length=50;
@@ -12,21 +13,30 @@ public class Ui {
     public static final String BOLD = "\u001B[1m";
     public static final String PURPLE = "\u001B[35m"; //magic and skill
     public static final String BLUE = "\u001B[34m";
+    public static final String leftUp=BLUE+"╔"+RESET;
+    public static final String leftDown=BLUE+"╚"+RESET;
+    public static final String rightUp=BLUE+"╗"+RESET;
+    public static final String rigthDown=BLUE+"╝"+RESET;
+    public static final String dash=BLUE+"═"+RESET;
     Scanner sc=new Scanner(System.in);
     public void clear(){
+    try {
+        new ProcessBuilder("clear").inheritIO().start().waitFor();
+    } catch (Exception e) {
         System.out.print("\033[H\033[2J");
-        System.out.flush();      
+        System.out.flush();
+    }     
     }
     public void top(){
-        System.out.println("╔"+"═".repeat(length)+"╗");
+        System.out.println(leftUp+dash.repeat(length)+rightUp+"\r\n");
     }
     public void bottom(){
-        System.out.println("╚"+"═".repeat(length)+"╝");
+        System.out.println(leftDown+"═".repeat(length)+rigthDown+"\r\n");
     }
     public void message(String name,String color){
         remain=length-name.length();
         top();
-        System.out.println("║"+name+" ".repeat(remain)+"║");
+        System.out.println("║"+name+" ".repeat(remain)+"║"+"\r\n");
         bottom();
     }
     public String input(String word){
@@ -40,11 +50,11 @@ public class Ui {
         String word=BOLD+GREEN+"["+title+"]"+RESET;
         top();
         if(remain%2!=0){
-        System.out.println("║"+" ".repeat(remain/2)+word+" "+" ".repeat(remain/2)+"║");
+        System.out.println("║"+" ".repeat(remain/2)+word+" "+" ".repeat(remain/2)+"║"+"\r\n");
         }else{
-          System.out.println("║"+" ".repeat(remain/2)+word+" ".repeat(remain/2)+"║");
+          System.out.println("║"+" ".repeat(remain/2)+word+" ".repeat(remain/2)+"║"+"\r\n");
         }
-        System.out.println("╠"+"═".repeat(length)+"╣");
+        System.out.println("╠"+"═".repeat(length)+"╣"+"\r\n");
         for(int i=0;i<options.size();i++){
         String option=options.get(i);
         remain = length-(option.length()+2);
@@ -53,27 +63,34 @@ public class Ui {
         }else{
             option="  "+options.get(i);
         }
-        System.out.println("║"+option+" ".repeat(remain)+"║");
+        System.out.println("║"+option+" ".repeat(remain)+"║"+"\r\n");
     }
         bottom();
     }
     public int menuAnimation(String title,ArrayList<String> options,String name){
         int selected=0;
         int action=1;
-        while(true){
+        try{
+            Runtime.getRuntime().exec(new String[] {"/bin/sh", "-c", "stty raw -echo </dev/tty"}).waitFor();
+            while(true){
             menu(title,options,selected);
-           String input=input(name);
-            if(input.equalsIgnoreCase("w") && selected>0){
+            int key = System.in.read(); 
+            if((key=='w'||key==65)&& selected>0){
                 selected--;
             }
-            else if(input.equalsIgnoreCase("s") && selected<options.size()-1){
+            else if((key=='s'||key==66)&& selected<options.size()-1){
                 selected++;
             }
-            else if(input.equalsIgnoreCase("")){
+            else if(key==13){
                 action=selected+1;
+                Runtime.getRuntime().exec(new String[] {"/bin/sh", "-c", "stty cooked echo </dev/tty"}).waitFor();
+
                 break;
             }
-            clear();
+        clear();            
+        }
+        }catch(IOException|InterruptedException e){
+            System.out.println("error");
         }
         return action;
     }
