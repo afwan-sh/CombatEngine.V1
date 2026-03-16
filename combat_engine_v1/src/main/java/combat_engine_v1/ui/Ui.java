@@ -91,9 +91,9 @@ public class Ui {
     }
 
     public String input(String word) {
-        String print = CYAN+"[Player@"+RESET+ YELLOW+word+RESET+ "]w↑/s↓:";
-        System.out.printf(print);
-        String output = sc.nextLine();
+        String print = CYAN+"[Player@"+RESET+ YELLOW+word+RESET+CYAN+"]w↑/s↓:"+RESET;
+        typeEffect(print);
+        String output = sc.nextLine();  
         clear();
         return output;
     }
@@ -116,7 +116,9 @@ public class Ui {
             } else {
                 option = "  " + options.get(i);
             }
-            System.out.println(wall + option + " ".repeat(remain) + wall);
+            System.out.print(wall); 
+            typeEffect(option);
+            System.out.println(" ".repeat(remain) + wall);
         }
         bottom();
     }
@@ -140,5 +142,15 @@ public class Ui {
             clear();
         }
         return action;
+    }
+    public void typeEffect(String word){
+        try{
+        for(int i=0;i<word.length();i++){
+		     System.out.print(word.charAt(i));
+		     Thread.sleep(10);
+		 }
+        }catch(InterruptedException e){
+
+        }
     }
 }
