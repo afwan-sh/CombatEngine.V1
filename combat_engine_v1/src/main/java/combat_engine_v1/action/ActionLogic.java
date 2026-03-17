@@ -14,10 +14,10 @@ public class ActionLogic {
             if (damage <= 0) {
                 damage = 1;
             }
-            String message = user.getClass().getSimpleName() + " has done " + damage + " of damage\n";
+            String message = user.getClass().getSimpleName()+" deals "+damage+" damage!";
             ui.redMessage(message);
         } else {
-            ui.yellowMessage("low Stamina");
+           ui.yellowMessage("Low stamina!");
         }
         user.subEND(1);
         return damage;

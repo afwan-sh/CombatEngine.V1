@@ -1,6 +1,7 @@
 package combat_engine_v1.userMenu;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import combat_engine_v1.ui.Ui;
 enum ExploringAction {
     EXPLORE("Explore"),
@@ -53,32 +54,32 @@ public class ExploringMenu {
                         actionChoice="status";
                         break;
                     case ESCAPE:
-                        System.out.println("You escaped the Dungeon.");
+                        ui.greenMessage("You escaped the Dungeon.");
                         actionChoice="Escape";
                         break;
                 }
                 isGameRunning=false;
             } catch (IllegalArgumentException e) {
-                System.out.println("no such option");
+                ui.yellowMessage("no such option");
             }
         }
         return actionChoice;
     }
 
     public void Explore(boolean isMonsterAppeared) {
-        System.out.println("Exploring...");
+        ui.cyanMessage("Exploring...");
         if (isMonsterAppeared) {
-            System.out.println("A monster appeared!");
+            ui.redMessage("A monster appeared!");
         } else {
-            System.out.println("Nothing here....");
+            ui.cyanMessage("Nothing here....");
         }
     }
 
     public void lookAround(boolean isMonsterAppeared) {
         if (isMonsterAppeared) {
-            System.out.println("There is a monster ahead!");
+            ui.yellowMessage("There is a monster ahead!");
         } else {
-            System.out.println("Your safe no Monster ahead! for now...");
+            ui.cyanMessage("Your safe no Monster ahead! for now...");
         }
     }
 }

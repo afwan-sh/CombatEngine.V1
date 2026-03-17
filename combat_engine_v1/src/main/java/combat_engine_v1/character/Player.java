@@ -1,5 +1,5 @@
 package combat_engine_v1.character;
-
+import combat_engine_v1.ui.Ui;
 public class Player extends Characters{
     private int MAXHP;
     private int MAXMP;
@@ -7,13 +7,16 @@ public class Player extends Characters{
     private int totalScore;
     private int EXP;
     public Player(){
-        super(100,50,15,10,15,20,1);
+        super(100,50,30,10,15,20,1);
         MAXHP=HP;
         MAXMP=MP;
         MAXEND=END;
     }
     public void getStatus(){
-        System.out.printf("Player Status:\nLevel:%d\nEXp:%d/%d\nHp:%d/%d\nMp:%d/%d\nAtk:%d\nDef:%d\nDex:%d\nEnd:%d/%d\n",Level,EXP,getMAXEXP(),HP,MAXHP,MP,MAXMP,ATK,DEF,DEX,END,MAXEND);
+        int xp=getMAXEXP();
+        String message="Player Status:\nLevel:"+Level+"\nExp:"+EXP+"/"+xp+"\nHp:"+HP+"/"+MAXHP+"\nMp:"+MP+"/"+MAXMP+"\nAtk:"+ATK+"\nDef:"+DEF+"\nDex:"+DEX+"\nEnd:"+END+"/"+MAXEND+"\n";
+        Ui ui=new Ui();
+        ui.cyanMessage(message);
     }
     public int getMaxHP(){
         return MAXHP;

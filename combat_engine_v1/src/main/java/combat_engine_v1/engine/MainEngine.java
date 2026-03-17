@@ -2,6 +2,7 @@ package combat_engine_v1.engine;
 import combat_engine_v1.character.Monster;
 import combat_engine_v1.character.Player;
 import combat_engine_v1.dungeonArea.AncientPool;
+import combat_engine_v1.ui.Ui;
 import combat_engine_v1.userMenu.ExploringMenu;
 public class MainEngine {
     public void startGame() {
@@ -10,6 +11,7 @@ public class MainEngine {
         BattleSys BattleSys = new BattleSys();
         ExploringMenu exploringMenu = new ExploringMenu();
         AncientPool ancientPool=new AncientPool();
+        Ui ui=new Ui();
         boolean isMonsterAppeared = false;
         int end=player.getEND();
         int monsterDeafedForPool=0;
@@ -19,7 +21,7 @@ public class MainEngine {
             String actionChoice = exploringMenu.exploring(isMonsterAppeared);
             if (actionChoice.equalsIgnoreCase("Explore") && isMonsterAppeared) {
                 if(end<=0){
-                    System.out.println("You Stamina is low");
+                    ui.yellowMessage("Low stamina!");
                 }else{
                     player.subEND(1);
                     BattleSys.battleStart(player, monster);
@@ -34,15 +36,14 @@ public class MainEngine {
                         player.subEND(5);
                         System.out.println("Number of monster defeated :"+player.getScore());
                     }else{
-                        System.out.println("You Stamina is low");
+                        ui.yellowMessage("Low stamina!");
                     }
                 break;
             } else if (actionChoice.equals("Explore")) {
                     if(end<=0){
-                        System.out.println("You Stamina is low");
+                        ui.yellowMessage("Low stamina!");
                     }
-                    ancientPool.poolAppeared(monsterDeafedForPool, player);
-                break;
+                    monsterDeafedForPool=ancientPool.poolAppeared(monsterDeafedForPool, player);
             }else if(actionChoice.equalsIgnoreCase("status")){
                 player.addEND(1);
                 player.getStatus();

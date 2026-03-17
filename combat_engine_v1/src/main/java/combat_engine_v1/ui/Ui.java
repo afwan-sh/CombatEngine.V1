@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    int length = 50;
+    int length = 60;
     int remain;
     public static final String RESET = "\u001B[0m";
-    public static final String RED = "\u001B[31m"; // for danger/damage
+    public static final String RED = "\u001B[31m"; // for danger/damag
     public static final String GREEN = "\u001B[32m"; // for good thing healing xp
     public static final String YELLOW = "\u001B[33m"; // warrning important info
     public static final String CYAN = "\u001B[36m"; // bodder player input
@@ -46,48 +46,132 @@ public class Ui {
     }
 
     public void greenMessage(String name) {
+        if(name.length()<length){
         remain = length - name.length();
         top();
-        System.out.println(wall + GREEN + name + RESET + " ".repeat(remain) + wall);
+        String print=wall + GREEN + name + RESET + " ".repeat(remain) + wall;
+        typeEffect(print);
+        System.out.println();
         bottom();
         sc.nextLine();
         clear();
+        }else{
+            String[] stringArray = name.split("\n");
+            top();
+		    for(String i:stringArray){
+                remain = length - i.length();
+                String print=wall + RED + i + RESET + " ".repeat(remain) + wall;
+                typeEffect(print);
+                System.out.println();
+		    }
+            bottom();
+            sc.nextLine();
+            clear();
+        }
     }
 
     public void redMessage(String name) {
-        remain = length - name.length();
-        top();
-        System.out.println(wall + RED + name + RESET + " ".repeat(remain) + wall);
-        bottom();
-        sc.nextLine();
-        clear();
+        if (name.length()<length) {
+            remain = length - name.length();
+            top();
+            String print=wall + RED + name + RESET + " ".repeat(remain) + wall;
+            typeEffect(print);
+            System.out.println();
+            bottom();
+            sc.nextLine();
+            clear();
+        }else{
+            String[] stringArray = name.split("\n");
+            top();
+		    for(String i:stringArray){
+                remain = length - i.length();
+                String print=wall + RED + i + RESET + " ".repeat(remain) + wall;
+                typeEffect(print);
+                System.out.println();
+		    }
+            bottom();
+            sc.nextLine();
+            clear();
+        }
     }
 
     public void yellowMessage(String name) {
+        if(name.length()<length){
         remain = length - name.length();
         top();
-        System.out.println(wall + YELLOW + name + RESET + " ".repeat(remain) + wall);
+        String print=wall + YELLOW + name + RESET + " ".repeat(remain) + wall;
+        typeEffect(print);
+        System.out.println();
         bottom();
         sc.nextLine();
         clear();
+         }else{
+            String[] stringArray = name.split("\n");
+            top();
+		    for(String i:stringArray){
+                remain = length - i.length();
+                String print=wall + RED + i + RESET + " ".repeat(remain) + wall;
+                typeEffect(print);
+                System.out.println();
+		    }
+            bottom();
+            sc.nextLine();
+            clear();
+        }
     }
 
     public void purpleMessage(String name) {
+        if(name.length()<length){
         remain = length - name.length();
         top();
-        System.out.println(wall + PURPLE + name + RESET + " ".repeat(remain) + wall);
+        String print=wall + PURPLE + name + RESET + " ".repeat(remain) + wall;
+        typeEffect(print);
+        System.out.println();
         bottom();
         sc.nextLine();
         clear();
+         }else{
+            String[] stringArray = name.split("\n");
+            top();
+		    for(String i:stringArray){
+                remain = length - i.length();
+                String print=wall + RED + i + RESET + " ".repeat(remain) + wall;
+                typeEffect(print);
+                System.out.println();
+		    }
+            bottom();
+            sc.nextLine();
+            clear();
+        }
     }
 
     public void cyanMessage(String name) {
+        if(name.length()<length){
         remain = length - name.length();
+        try{
         top();
-        System.out.println(wall + CYAN + name + RESET + " ".repeat(remain) + wall);
+        String print=wall + CYAN + name + RESET + " ".repeat(remain) + wall;
+        typeEffect(print);
+        System.out.println();
         bottom();
-        sc.nextLine();
+        Thread.sleep((int)(Math.random()*4+1)*100);
         clear();
+        }catch(InterruptedException e){
+            System.err.println("Error");
+        }
+        }else{
+            String[] stringArray = name.split("\n");
+            top();
+		    for(String i:stringArray){
+                remain = length - i.length();
+                String print=wall + RED + i + RESET + " ".repeat(remain) + wall;
+                typeEffect(print);
+                System.out.println();
+		    }
+            bottom();
+            sc.nextLine();
+            clear();
+        }
     }
 
     public String input(String word) {
@@ -116,9 +200,7 @@ public class Ui {
             } else {
                 option = "  " + options.get(i);
             }
-            System.out.print(wall); 
-            typeEffect(option);
-            System.out.println(" ".repeat(remain) + wall);
+            System.out.println(wall+option+" ".repeat(remain) + wall);
         }
         bottom();
     }
@@ -146,11 +228,11 @@ public class Ui {
     public void typeEffect(String word){
         try{
         for(int i=0;i<word.length();i++){
-		     System.out.print(word.charAt(i));
-		     Thread.sleep(10);
+		    System.out.print(word.charAt(i));
+		    Thread.sleep(10);
 		 }
         }catch(InterruptedException e){
-
+            System.err.println("Error");
         }
     }
 }

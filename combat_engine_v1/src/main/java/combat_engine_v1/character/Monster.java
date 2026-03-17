@@ -1,4 +1,5 @@
 package combat_engine_v1.character;
+import combat_engine_v1.ui.Ui;
 public class Monster extends Characters{
     private int MAXHP;
     private int MAXMP;
@@ -10,7 +11,9 @@ public class Monster extends Characters{
         MAXEND=END;
     }
     public void getStatus(){
-        System.out.printf("Monster Status:\nLevel:%d\nHp:%d/%d\nMp:%d/%d\nAtk:%d\nDef:%d\nDex:%d\nEnd:%d/%d\n",Level,HP,MAXHP,MP,MAXMP,ATK,DEF,DEX,END,MAXEND);
+        String message=String.format("Monster Status:\nLevel:%d\nHp:%d/%d\nMp:%d/%d\nAtk:%d\nDef:%d\nDex:%d\nEnd:%d/%d\n",Level,HP,MAXHP,MP,MAXMP,ATK,DEF,DEX,END,MAXEND);
+        Ui ui=new Ui();
+        ui.cyanMessage(message);
     }  
     public int getDex(){
         return DEX;
